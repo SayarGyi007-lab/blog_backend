@@ -21,6 +21,8 @@ interface User{
 
 const protect = asyncHandler(async(req: AuthRequest, res: Response, next: NextFunction)=>{
     let token;
+    console.log("Cookies received:", req.cookies);
+
 
     token = req.cookies.token
 
