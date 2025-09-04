@@ -15,9 +15,6 @@ dotenv_1.default.config({
     path: ".env"
 });
 const app = (0, express_1.default)();
-// app.use(cors({
-//     origin: process.env
-// }))
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, cors_1.default)());
