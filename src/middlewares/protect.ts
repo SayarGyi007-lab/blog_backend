@@ -35,6 +35,9 @@ const protect = asyncHandler(async(req: AuthRequest, res: Response, next: NextFu
             res.status(401)
             throw new Error("Unauthorized, Invalid token")
         }
+        console.log("Token received:", token);
+        console.log("Decoded JWT:", decoded);
+
         req.user = await User.findById(decoded.userId) as User
         next()
     } catch (error) {
