@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const user_1 = require("../controller/user");
+const multer_1 = require("../middlewares/multer");
+const protect_1 = require("../middlewares/protect");
+const admin_1 = require("../middlewares/admin");
+const route = (0, express_1.Router)();
+route.post("/register", multer_1.upload.fields([{ name: "profileImageUrl", maxCount: 1 }]), user_1.userRegister);
+route.post("/login", user_1.userLogin);
+route.post("/logout", user_1.userLogout);
+route.route("/profile").get(protect_1.protect, user_1.getUserProfile).put(protect_1.protect, multer_1.upload.single("profileImageUrl"), user_1.updateProfile);
+route.get("/users", protect_1.protect, admin_1.admin, user_1.getAllUser);
+route.get("/users/:id", protect_1.protect, user_1.getUserById);
+route.delete("/delete/:id", protect_1.protect, user_1.deleteUser);
+exports.default = route;

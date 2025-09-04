@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const protect_1 = require("../middlewares/protect");
+const comment_1 = require("../controller/comment");
+const multer_1 = require("../middlewares/multer");
+const route = (0, express_1.Router)();
+route.route("/:id/comments").post(protect_1.protect, multer_1.upload.fields([{ name: "commentImageUrl", maxCount: 1 }]), comment_1.addComment).get(protect_1.protect, comment_1.getAllComments);
+route.route("/:id/comments/:commentId").delete(protect_1.protect, comment_1.deleteComment).put(protect_1.protect, multer_1.upload.single("commentImageUrl"), comment_1.updateComment);
+route.put("/comments/:commentId/like", protect_1.protect, comment_1.toggleLikeComment);
+route.post("/:id/comments/:commentId/reply", protect_1.protect, multer_1.upload.fields([{ name: "commentImageUrl", maxCount: 1 }]), comment_1.replyCommentController);
+//route.get("/:id/comments/nested", protect, getNestedComments);
+exports.default = route;

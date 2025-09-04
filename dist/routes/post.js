@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const post_1 = require("../controller/post");
+const protect_1 = require("../middlewares/protect");
+const multer_1 = require("../middlewares/multer");
+const photovalidator_1 = require("../middlewares/photovalidator");
+const route = (0, express_1.Router)();
+route.get("/post/search", protect_1.protect, post_1.searchPost);
+route.post("/post/create", protect_1.protect, multer_1.upload.fields([{ name: "postImageUrl", maxCount: 10 }]), photovalidator_1.validateImageCount, post_1.postCreate);
+route.delete("/post/delete/:id", protect_1.protect, post_1.deletePost);
+route.get("/post/", protect_1.protect, post_1.getAllPostOnUserWall);
+route.route("/post/:id").get(protect_1.protect, post_1.getPostById).put(protect_1.protect, multer_1.upload.fields([{ name: "postImageUrl", maxCount: 10 }]), photovalidator_1.validateImageCount, post_1.updatePost);
+route.put("/post/:id/like", protect_1.protect, post_1.likePost);
+route.route("/post/:id/share").post(protect_1.protect, post_1.sharePost).put(protect_1.protect, post_1.updateSharedPost);
+route.get("/", protect_1.protect, post_1.globalFeed);
+exports.default = route;
