@@ -27,3 +27,5 @@ This project is a full-stack blog platform integrated with AI, allowing users to
 
 Backend API Server: [Apis](https://blog-backend-9f0r.onrender.com)
 
+Frontent (In Progress): [blog-web](https://blog-web-frontend-gilt.vercel.app/)
+
