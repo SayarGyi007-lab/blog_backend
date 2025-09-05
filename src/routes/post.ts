@@ -15,5 +15,5 @@ route.put("/post/:id/like",protect,likePost)
 route.route("/post/:id/share").post(protect,sharePost).put(protect,updateSharedPost)
 
 
-route.get("/",protect,globalFeed)
+route.get("/",globalFeed)
 export default route
