@@ -6,6 +6,7 @@ import UserRoute from "./routes/user"
 import PostRoute from "./routes/post"
 import CommentRoute from "./routes/comment"
 import cookieParser from 'cookie-parser'
+import { summarizeContent } from "./controller/summary"
 
 dotenv.config({
     path: ".env"
@@ -25,6 +26,7 @@ app.use(cookieParser())
 app.use(UserRoute)
 app.use(PostRoute)
 app.use(CommentRoute)
+app.post("/api/summarize",summarizeContent)
 
 const PORT = process.env.PORT || 4000
 
